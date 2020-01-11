@@ -135,6 +135,8 @@
 		9A69BAF123C8F077009DD388 /* shader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shader.frag; sourceTree = "<group>"; };
 		9A69BAF323C8F077009DD388 /* shader.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shader.vert; sourceTree = "<group>"; };
 		9A69BAF423C8F077009DD388 /* shader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shader.frag; sourceTree = "<group>"; };
+		9A69BAF623CA0D84009DD388 /* shader.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shader.vert; sourceTree = "<group>"; };
+		9A69BAF723CA0D84009DD388 /* shader.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shader.frag; sourceTree = "<group>"; };
 		9D55C918270CC85C38C61140 /* graphutils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = graphutils.h; path = ../../../addons/ofxAudioAnalyzer/libs/essentia/include/essentia/scheduler/graphutils.h; sourceTree = SOURCE_ROOT; };
 		9FC51B01FA0EE5D750125994 /* peak.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = peak.h; path = ../../../addons/ofxAudioAnalyzer/libs/essentia/include/essentia/utils/peak.h; sourceTree = SOURCE_ROOT; };
 		A480BA1389E17B9874316172 /* tnt_i_refvec.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = tnt_i_refvec.h; path = ../../../addons/ofxAudioAnalyzer/libs/essentia/include/essentia/utils/tnt/tnt_i_refvec.h; sourceTree = SOURCE_ROOT; };
@@ -550,6 +552,7 @@
 		9A69BAEE23C8F077009DD388 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				9A69BAF523CA0D7B009DD388 /* shader_box */,
 				9A69BAEF23C8F077009DD388 /* shader_1 */,
 				9A69BAF223C8F077009DD388 /* shader_2 */,
 			);
@@ -573,6 +576,15 @@
 				9A69BAF423C8F077009DD388 /* shader.frag */,
 			);
 			path = shader_2;
+			sourceTree = "<group>";
+		};
+		9A69BAF523CA0D7B009DD388 /* shader_box */ = {
+			isa = PBXGroup;
+			children = (
+				9A69BAF623CA0D84009DD388 /* shader.vert */,
+				9A69BAF723CA0D84009DD388 /* shader.frag */,
+			);
+			path = shader_box;
 			sourceTree = "<group>";
 		};
 		9E4032E9D5449942AD40D131 /* sndfile */ = {

@@ -38,9 +38,10 @@ float fbm ( in vec2 _st) {
   float v = 0.0;
   float a = 0.5;
   vec2 shift = vec2(100.0);
+  
   // Rotate to reduce axial bias
-  mat2 rot = mat2(cos(0.5), sin(0.5),
-                  -sin(0.5), cos(0.50));
+  mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.5));
+  
   for (int i = 0; i < NUM_OCTAVES; ++i) {
     v += a * noise(_st);
     _st = rot * _st * 2.0 + shift;
@@ -72,11 +73,11 @@ void main() {
   vec2 v = vec2(0.);
 //  v.x = fbm(u + vec2(1.7 * u_time, 1.2));
 //  v.y = fbm(u + vec2(5.3 * u_time, 2.3));
-  v.x = fbm(u + vec2(u_sound * u_time, 1.2));
-  v.y = fbm(u + vec2(u_sound * u_time, 2.3));
+  v.x = fbm(u + vec2(u_sound * u_time, 1.2 * u_sound));
+  v.y = fbm(u + vec2(u_sound * u_time, 2.3 * u_sound));
   
   vec2 z = vec2(0.);
-  z.x = fbm(v + vec2(0.2, 1.2));
+  z.x = fbm(v + vec2(0.2 * u_sound, 1.2));
   z.y = fbm(v + vec2(0.1, 2.3));
   
   float f = fbm(st+u);
@@ -87,27 +88,27 @@ void main() {
   
   color = mix(color,
               vec3(0.1, 0.2, sin(u_time) * .1),
-              clamp(f * u_time, 0.0, 1.0)
+              clamp(f * sin(u_time), 0.0, 1.0)
               );
   
   color = mix(color,
               vec3(.1, .1, .25),
-              clamp(length(cos(q.x * u_time)), 0, .8)
+              clamp(cos(q.x * u_time), 0, .8)
               );
   
   color = mix(color,
               vec3(.1, 0.1, 0.2),
-              clamp(length(cos(s.x * u_time)), .3, .5)
+              clamp(cos(s.x * u_time), .2, .5)
               );
   
   color = mix(color,
-              vec3(.1, 0.1, 0.2),
-              clamp(length(cos(s.x * u_time)), .3, .5)
+              vec3(.0, 0.1, 0.2),
+              clamp(cos(s.x * u_time), .3, .5)
               );
   
   color = mix(color,
-              vec3(.1, 0.1, 0.2),
-              clamp(length(cos(s.x * u_time)), .3, .5)
+              vec3(.0, 0.1, 0.2),
+              clamp(cos(s.x * u_time), .3, .5)
               );
   
 //  float timedColor2 = sin(u_time * .24);
@@ -115,29 +116,29 @@ void main() {
   vec3 color2 = vec3(1.0, .0, .6);
   
   color2 = mix(color2,
-              vec3(.1, 0.2, .5),
-              clamp(length(sin(s.y * u_time)), .25 , 1.0));
+              vec3(0.8, 0.2, .1),
+              clamp(length(sin(s.y)), .25 , 1.0));
   
   
   color2 = mix(color2,
-              vec3(0.2, 0.2, .8 * u_time),
-              clamp(length(sin(z.y * u_time)), .2 , .8)
+              vec3(0.8, 0.2, u_sound * .9),
+              clamp(sin(z.y), .2 , .8)
                );
   
-  color2 = mix(vec3(0.1, u_sound * .2, .1),
-               color2,
-               clamp(length(sin(z.y * u_time)), .2 , .8)
+  color2 = mix(color2,
+               vec3(u_sound * 0.8, 0.2, u_sound * .1),
+               clamp(sin(z.y), .2 , .8)
                );
   
   color = mix(
               color,
               color2,
-              clamp(length(sin(z.y * u_time)), .2 , .8)
+              clamp(sin(z.y) * u_sound, .2 , 1.0)
               );
 
   //  outputColor = vec4((f*f+.6*f*f+.5*f)*color,
 //  outputColor = vec4((f * f * .3 + f * f * r.x + f * f * f + z.y)*color,1.);
   
-  outputColor = vec4((f * f * .1) * color, 1.);
+  outputColor = vec4((f * f * .3 + f * f * r.x + z.y) * color, 1.);
 }
 
