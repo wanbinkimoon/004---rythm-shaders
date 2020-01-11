@@ -27,7 +27,7 @@ void ofApp::update(){
   //get the analysis values
 //  rms_l = audioAnalyzer.getValue(RMS, 0, smooth);
 //  rms_r = audioAnalyzer.getValue(RMS, 1, smooth);
-//  melBands = audioAnalyzer.getValues(MEL_BANDS, 0, smooth);
+  melBands = audioAnalyzer.getValues(MEL_BANDS, 0, smooth);
 }
 
 //--------------------------------------------------------------
@@ -42,7 +42,7 @@ void ofApp::draw(){
   shader.end();
     
   int side = 200;
-  int maxZ = 300;
+  int maxZ = 600;
   ofNoFill(); ofSetColor(255);
   ofDrawRectangle(
                   ofGetWidth() * .5 - side + side * .1 + 1,
@@ -53,18 +53,18 @@ void ofApp::draw(){
   
   shader_box.begin();
   ofFill();
-  ofDrawBox(ofGetWidth() * .5 - side  * .5 - side * .1, ofGetHeight() * .5 - side * .5 - side * .1, ofMap(sound_v, 0, 1, 0, maxZ) * .5, side, side, side * 2 + ofMap(sound_v, 0, 1, 0, maxZ));
-  ofDrawBox(ofGetWidth() * .5 + side  * .5 + side * .1, ofGetHeight() * .5 - side * .5 - side * .1, ofMap(sound_v, 0, 1, 0, maxZ) * .5, side, side, side * 2 + ofMap(sound_v, 0, 1, 0, maxZ));
-  ofDrawBox(ofGetWidth() * .5 - side  * .5 - side * .1, ofGetHeight() * .5 + side * .5 + side * .1, ofMap(sound_v, 0, 1, 0, maxZ) * .5, side, side, side * 2 + ofMap(sound_v, 0, 1, 0, maxZ));
-  ofDrawBox(ofGetWidth() * .5 + side  * .5 + side * .1, ofGetHeight() * .5 + side * .5 + side * .1, ofMap(sound_v, 0, 1, 0, maxZ) * .5, side, side, side * 2 + ofMap(sound_v, 0, 1, 0, maxZ));
+  ofDrawBox(ofGetWidth() * .5 - side  * .5 - side * .1, ofGetHeight() * .5 - side * .5 - side * .1, ofMap(melBands[1], DB_MIN, DB_MAX, -maxZ, maxZ) * .5, side, side, side * 2 + ofMap(melBands[1], DB_MIN, DB_MAX, -maxZ, maxZ));
+  ofDrawBox(ofGetWidth() * .5 + side  * .5 + side * .1, ofGetHeight() * .5 - side * .5 - side * .1, ofMap(melBands[2], DB_MIN, DB_MAX, -maxZ, maxZ) * .5, side, side, side * 2 + ofMap(melBands[2], DB_MIN, DB_MAX, -maxZ, maxZ));
+  ofDrawBox(ofGetWidth() * .5 - side  * .5 - side * .1, ofGetHeight() * .5 + side * .5 + side * .1, ofMap(melBands[4], DB_MIN, DB_MAX, -maxZ, maxZ) * .5, side, side, side * 2 + ofMap(melBands[4], DB_MIN, DB_MAX, -maxZ, maxZ));
+  ofDrawBox(ofGetWidth() * .5 + side  * .5 + side * .1, ofGetHeight() * .5 + side * .5 + side * .1, ofMap(melBands[6], DB_MIN, DB_MAX, -maxZ, maxZ) * .5, side, side, side * 2 + ofMap(melBands[6], DB_MIN, DB_MAX, -maxZ, maxZ));
   shader_box.end();
   
   shader_1.begin();
   ofNoFill(); ofSetColor(255);
-  ofDrawBox(ofGetWidth() * .5 - side  * .5 - side * .1, ofGetHeight() * .5 - side * .5 - side * .1, ofMap(sound_v, 0, 1, 0, maxZ) * .5, side, side, side * 2 + ofMap(sound_v, 0, 1, 0, maxZ));
-  ofDrawBox(ofGetWidth() * .5 + side  * .5 + side * .1, ofGetHeight() * .5 - side * .5 - side * .1, ofMap(sound_v, 0, 1, 0, maxZ) * .5, side, side, side * 2 + ofMap(sound_v, 0, 1, 0, maxZ));
-  ofDrawBox(ofGetWidth() * .5 - side  * .5 - side * .1, ofGetHeight() * .5 + side * .5 + side * .1, ofMap(sound_v, 0, 1, 0, maxZ) * .5, side, side, side * 2 + ofMap(sound_v, 0, 1, 0, maxZ));
-  ofDrawBox(ofGetWidth() * .5 + side  * .5 + side * .1, ofGetHeight() * .5 + side * .5 + side * .1, ofMap(sound_v, 0, 1, 0, maxZ) * .5, side, side, side * 2 + ofMap(sound_v, 0, 1, 0, maxZ));
+  ofDrawBox(ofGetWidth() * .5 - side  * .5 - side * .1, ofGetHeight() * .5 - side * .5 - side * .1, ofMap(melBands[1], DB_MIN, DB_MAX, -maxZ, maxZ) * .5, side, side, side * 2 + ofMap(melBands[1], DB_MIN, DB_MAX, -maxZ, maxZ));
+  ofDrawBox(ofGetWidth() * .5 + side  * .5 + side * .1, ofGetHeight() * .5 - side * .5 - side * .1, ofMap(melBands[2], DB_MIN, DB_MAX, -maxZ, maxZ) * .5, side, side, side * 2 + ofMap(melBands[2], DB_MIN, DB_MAX, -maxZ, maxZ));
+  ofDrawBox(ofGetWidth() * .5 - side  * .5 - side * .1, ofGetHeight() * .5 + side * .5 + side * .1, ofMap(melBands[4], DB_MIN, DB_MAX, -maxZ, maxZ) * .5, side, side, side * 2 + ofMap(melBands[4], DB_MIN, DB_MAX, -maxZ, maxZ));
+  ofDrawBox(ofGetWidth() * .5 + side  * .5 + side * .1, ofGetHeight() * .5 + side * .5 + side * .1, ofMap(melBands[6], DB_MIN, DB_MAX, -maxZ, maxZ) * .5, side, side, side * 2 + ofMap(melBands[6], DB_MIN, DB_MAX, -maxZ, maxZ));
   shader_1.end();
 }
 //--------------------------------------------------------------
